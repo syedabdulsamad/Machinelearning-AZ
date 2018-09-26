@@ -35,4 +35,8 @@ features = hotEncoder.fit_transform(features).toarray()
 labelEncoder_output = LabelEncoder()
 result = labelEncoder_output.fit_transform(result)
 
+# training and test sample data
+from sklearn.model_selection import train_test_split
+feature_train, feature_test, result_train, result_test = train_test_split(features, result, test_size = 0.2, random_state = 0)
+
 
