@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Tue Sep 25 17:19:06 2018
+Created on Thu Sep 27 12:18:41 2018
 
 @author: abdulsamad
 """
@@ -18,11 +18,11 @@ features = dataset.iloc[:, :-1].values
 result = dataset.iloc[:,3].values
 
 # missing data
-"""imputer = Imputer(missing_values = 'NaN', strategy = 'mean', axis = 0)
+imputer = Imputer(missing_values = 'NaN', strategy = 'mean', axis = 0)
 imputer = imputer.fit(features[:, 1:3])
-features[:, 1:3] = imputer.transform(features[:, 1:3])"""
+features[:, 1:3] = imputer.transform(features[:, 1:3])
 
-""" from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
  
  # Encoding categorical data input features
 labelEncoder_input  = LabelEncoder()
@@ -31,7 +31,7 @@ hotEncoder = OneHotEncoder(categorical_features = [0])
 features = hotEncoder.fit_transform(features).toarray()
 # Encoding output features
 labelEncoder_output = LabelEncoder()
-result = labelEncoder_output.fit_transform(result)"""
+result = labelEncoder_output.fit_transform(result)
 
 
 # training and test sample data
@@ -39,8 +39,8 @@ from sklearn.model_selection import train_test_split
 feature_train, feature_test, result_train, result_test = train_test_split(features, result, test_size = 0.2, random_state = 0)
 
 # feature scaling
-"""from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler
 scaler = StandardScaler()
 feature_train =  scaler.fit_transform(feature_train)
-feature_test =  scaler.transform(feature_test)"""
+feature_test =  scaler.transform(feature_test)
 
