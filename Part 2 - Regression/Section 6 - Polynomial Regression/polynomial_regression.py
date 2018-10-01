@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Tue Sep 25 17:19:06 2018
+Created on Mon Oct  1 14:48:00 2018
 
 @author: abdulsamad
 """
@@ -13,10 +13,14 @@ import pandas as pd
 
 from sklearn.preprocessing import Imputer
 
-dataset = pd.read_csv('Data.csv')
-features = dataset.iloc[:, :-1].values
-result = dataset.iloc[:,3].values
+dataset = pd.read_csv('Position_Salaries.csv')
+features = dataset.iloc[:, 1:2].values
+result = dataset.iloc[:,(np.shape(dataset)[1] - 1)].values
+#result = dataset.iloc[:,(np.shape(dataset)[1] - 1)].values
 
+from sklearn.preprocessing import LabelEncoder
+labelEncoder = LabelEncoder()
+features[:, 0] = labelEncoder.fit_transform(features[:, 0])
 
 # training and test sample data
 from sklearn.model_selection import train_test_split
