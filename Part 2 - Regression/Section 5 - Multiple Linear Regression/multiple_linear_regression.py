@@ -44,19 +44,20 @@ s = (np.shape(features)[0], 1)
 features = np.append(arr = np.ones(s, dtype = int), values = features, axis = 1)
 features_OPT = features[:, [0, 1, 2, 3, 4, 5]]
 
-def automatic_backward_elimination(feature_matrix, index_to_remove = -1):
-    if index_to_remove >= 0:
-        # remove the index and create new features matrix
-        feature_matrix = np.delete(feature_matrix, (index_to_remove), axis = 1)
+def automatic_backward_elimination(feature_matrix, pValue = 1000):
+    while True:
+        # fit the regressor
+        regressor_OLS = sm.OLS(result, exog = feature_matrix).fit()
+        pValue = max(regressor_OLS.pvalues)
         
-    regressor_OLS = sm.OLS(result, exog = feature_matrix).fit()
-    max_pValue = max(regressor_OLS.pvalues)
-    if max_pValue > 0.05:
-       index = np.argmax(regressor_OLS.pvalues)
-       automatic_backward_elimination(feature_matrix, index)
-    
-            
-automatic_backward_elimination(features_OPT)
+        if pValue > 0.05:
+            index_to_remove = np.argmax(regressor_OLS.pvalues) # get index of the max p value
+            feature_matrix = np.delete(feature_matrix, (index_to_remove), axis = 1)
+        else:
+            return feature_matrix
+
+features_OPT = automatic_backward_elimination(features_OPT)
+print(features_OPT)
 
 
 
